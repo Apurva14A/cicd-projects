@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - jenkins-sonar-network
+    restart: always
+
+  sonarqube:
+    image: sonarqube:latest
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:h2:tcp://sonarqube-db/sonar
+    networks:
+      - jenkins-sonar-network
+    depends_on:
+      - sonarqube-db
+    restart: always
+
+  sonarqube-db:
+    image: postgres:alpine
+    container_name: sonarqube-db
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+      - POSTGRES_DB=sonar
+    networks:
+      - jenkins-sonar-network
+    volumes:
+      - sonarqube-db:/var/lib/postgresql/data
+    restart: always
+
+networks:
+  jenkins-sonar-network:
+    driver: bridge
+
+volumes:
+  jenkins_home:
+  sonarqube-db:
