@@ -3,7 +3,7 @@ name: Terraform integration with GitHub Actions workflow
 on:
   push:
     branches:
-      - "main"
+      - "4-terraform-integration-with-actions"
 
 jobs:
   build:
@@ -19,6 +19,6 @@ jobs:
         with:
           terraform_version: "1.6.5"
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-            
+
         
             
