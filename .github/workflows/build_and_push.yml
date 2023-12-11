@@ -32,10 +32,13 @@ jobs:
       - name: Build and push
         env:
          REPO_NAME: "custom-images"
+         DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${REPO_NAME}:latest
+          tags: |
+            $DOCKER_USERNAME/${REPO_NAME}:$GITHUB_SHA
+
 
             
