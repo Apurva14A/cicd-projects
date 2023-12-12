@@ -2,12 +2,14 @@ version: '3'
 
 services:
   jenkins:
-    image: jenkins/jenkins:lts
+    image: aapurva/jenkins-build-agent:v1.0
     container_name: jenkins
     ports:
       - "8080:8080"
+      - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - jenkins-sonar-network
     restart: always
@@ -37,6 +39,16 @@ services:
     volumes:
       - sonarqube-db:/var/lib/postgresql/data
     restart: always
+
+  # nginx:
+  #   image: nginx:latest
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf
+  #   networks:
+  #     - jenkins-sonar-network
+  #   restart: always    
 
 networks:
   jenkins-sonar-network:
