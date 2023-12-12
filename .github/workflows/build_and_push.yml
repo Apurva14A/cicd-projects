@@ -10,6 +10,8 @@ on:
         description: 'Input Version' 
       myValues: 
         description: 'Input Values'
+env:
+   TEST_TAG: ${{ secret.DOCKERHUB_USERNAME }}/ ${{ secrets.REPO_NAME }}:latest
 
 jobs:
   build:
@@ -28,6 +30,16 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Build and export to Docker
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          load: true
+          tags: ${{ env.TEST_TAG }}
+      - name: Test
+        run: |
+          docker run --rm ${{ env.TEST_TAG }}  
 
       - name: Build and push to  the Dockerhub
         env:
@@ -37,7 +49,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: aapurva/custom-images:latest
+          tags: ${{ env.TEST_TAG }}
 
 
             
