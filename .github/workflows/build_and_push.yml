@@ -1,9 +1,6 @@
 name: Build and Push Docker image to the Registry
 
-on: 
-  push:
-    branches:
-      - "main"
+on:
   workflow_dispatch: 
     inputs: 
       myVersion: 
