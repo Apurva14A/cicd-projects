@@ -29,7 +29,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build and push to  the Dockerhub
         env:
          REPO_NAME: "custom-images"
          DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
