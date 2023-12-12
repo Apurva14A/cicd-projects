@@ -3,7 +3,7 @@ name: Build and Push Docker image to the Registry
 on: 
   push:
     branches:
-      - "3-build-and-push-docker-image-to-registry"
+      - "main"
   workflow_dispatch: 
     inputs: 
       myVersion: 
