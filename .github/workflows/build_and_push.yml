@@ -11,7 +11,7 @@ on:
       myValues: 
         description: 'Input Values'
 env:
-   TEST_TAG: ${{ secretS.DOCKERHUB_USERNAME }}/ ${{ secrets.REPO_NAME }}:latest
+   TEST_TAG: ${{ secrets.IMAGE_TAGS }}:latest
 
 jobs:
   build:
