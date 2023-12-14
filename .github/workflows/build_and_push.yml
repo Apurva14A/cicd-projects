@@ -1,12 +1,9 @@
 name: Build and Push Docker image to the Registry
 
 on:
-  workflow_dispatch: 
-    inputs: 
-      myVersion: 
-        description: 'Input Version' 
-      myValues: 
-        description: 'Input Values'
+  push:
+    branches:
+      - "6-trivy-config-for-image-sacnning"
 env:
    TEST_TAG: ${{ secrets.IMAGE_TAGS }}
 
