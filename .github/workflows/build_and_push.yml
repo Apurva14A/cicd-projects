@@ -8,7 +8,7 @@ on:
       myValues: 
         description: 'Input Values'
 env:
-   TEST_TAG: ${{ secrets.IMAGE_TAGS }}:latest
+   TEST_TAG: ${{ secrets.IMAGE_TAGS }}
 
 jobs:
   build:
