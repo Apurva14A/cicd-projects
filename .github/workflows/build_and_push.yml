@@ -42,22 +42,6 @@ jobs:
           scan-ref: '.'
           trivy-config: trivy.yaml
       
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: 'results.sarif'
-
-      # - name: Build and push to  the Dockerhub
-      #   env:
-      #    REPO_NAME: "custom-images"
-      #    DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      #   uses: docker/build-push-action@v5
-      #   with:
-      #     context: .
-      #     push: true
-      #     tags: ${{ env.TEST_TAG }}
-      #     cache-from: type=registry,ref=${{ env.TEST_TAG }}
-      #     cache-to: type=inline
 
 
-            
+  
