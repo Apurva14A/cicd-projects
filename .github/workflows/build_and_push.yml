@@ -31,7 +31,6 @@ jobs:
           docker build -t ${{ env.TEST_TAG }}:${{ github.sha }} .
       
       - name: Push Docker Image to Registry
-        if: always() 
         run: |
           docker push ${{ env.TEST_TAG }}:${{ github.sha }}
 
@@ -42,14 +41,11 @@ jobs:
           scan-type: 'fs'
           scan-ref: '.'
           trivy-config: trivy.yaml
-
-      - name: Check for Critical Vulnerabilities
-        run: |
-          trivy_exit_code=$(trivy exit-code --severity CRITICAL --input results.json)
-          if [ "$trivy_exit_code" -ne 0 ]; then
-            echo "Critical vulnerabilities found. Not pushing the image."
-            exit 1
-          fi
+      
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'results.sarif'
 
       # - name: Build and push to  the Dockerhub
       #   env:

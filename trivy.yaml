@@ -1,9 +1,9 @@
 timeout: 10m
-format: table
+format: sarif
 dependency-tree: true
 list-all-pkgs: true
 exit-code: 1
-output: result.json
+output: result.sarif
 severity:
   - HIGH
   - CRITICAL
